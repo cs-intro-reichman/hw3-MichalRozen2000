@@ -30,7 +30,7 @@ public class Algebra {
 			x1++;
 		}
 	} else {
-		for (int i = 0 ; i < x2 ; i++){
+		for (int i = 0 ; i < -x2 ; i++){
 			x1--;
 		}
 	}
@@ -68,7 +68,7 @@ public class Algebra {
 		for (int i = 0 ; i < x2 ; i++){
 			total = plus(total, x1);		
 		}
-	    if ((x1 < 0 && x2 >= 0) || (x2 < 0 && x1 >= 0)) {
+		if ((x1 < 0 && x2 >= 0) || (x2 < 0 && x1 >= 0)) {
 			total = minus(0, total);
 		}
 		return total;
@@ -87,6 +87,7 @@ public class Algebra {
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
 		int result = 0;
+		
 		if (x1 == x2){
 			return 1;
 		}
