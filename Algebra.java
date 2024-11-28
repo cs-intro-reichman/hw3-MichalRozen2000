@@ -39,27 +39,32 @@ public class Algebra {
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		if (x2 >=0) {
-		for (int i = 0 ; i < x2 ; i++){
-			x1--;
-		}
+		if (x2 < 0) {
+		for (int i = 0 ; i < -x2 ; i++){
+			x1++;
+		 }
 		} else {
 			for (int i = 0 ; i < x2 ; i++){
-				x1++;
-		}
-	}
+				x1--;
+		 }
+	   }
 		return x1;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		if (x1 < 0) {
-			x1 = minus(0, x1);
-		}
-		if (x2 < 0) {
-			x2 = minus (0, x2);
-		}
-		int total = 0;
+
+		if (x1 == 0 || x2 == 0) {
+            return 0;  
+        }
+        int total = 0;
+
+        if (x1 < 0) {
+            x1 = minus(0, x1);
+        }
+        if (x2 < 0) {
+            x2 = minus(0, x2);
+        }
 		for (int i = 0 ; i < x2 ; i++){
 			total = plus(total, x1);		
 		}
@@ -85,51 +90,41 @@ public class Algebra {
 		if (x1 == x2){
 			return 1;
 		}
-		if (x1 < 0 && x2 >= 0) {
-			x1 = minus(0, x1);  
-			while (x1 >= x2) {
-				x1 = minus(x1, x2);  
-				result = plus(result, 1);  
-			}
-			result = minus(0, result);  
+		if (x2 == 0) {
+			return 0;
 		}
-		else if (x1 >= 0 && x2 < 0) {
-			x2 = minus(0, x2);  
-			while (x1 >= x2) {
-				x1 = minus(x1, x2);  
-				result = plus(result, 1);  
-			}
-			result = minus(0, result);  
-		}
-		else {
-			
-			while (x1 >= x2) {
-				x1 = minus(x1, x2);  
-				result = plus(result, 1);  
-			}
-		}
-	
+
+		 while (x1 >= x2) {
+            x1 = minus(x1, x2);
+            result = plus(result, 1);
+        }
+
+		if ((x1 < 0 && x2 >= 0) || (x2 < 0 && x1 >= 0)) {
+            result = minus(0, result);
+        }
+		
 		return result;
 	
 }
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
+		if (x2 == 0) {
+			return 0;
+		}
+		int result = 0;
+
 		if (x1 < 0) {
 			x1 = minus (0, x1);
 		}
 		if (x2 < 0) {
 			x2 = minus (0, x2);
 		}
-		int result = 0;
-		int lastCorrectResult = 0;
-			int i;
-			for (i = 0; result <= x1; i++){	
-				lastCorrectResult = result;
-				result = plus(lastCorrectResult, x2);					
-	}	
+		while (result + x2 <= x1) {
+            result = plus(result, x2);
+        }						
 
-	    int finalMod = minus(x1, lastCorrectResult);
+	    int finalMod = minus(x1, result);
 
 		if (x1 < 0 && x2 >= 0 || x2 < 0 && x1 >= 0) {
 			finalMod = minus(0, finalMod);
@@ -140,6 +135,9 @@ public class Algebra {
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
+		if (x < 0) {
+			return 0;
+		}
 		int number = 0;
 		int i;
 		for (i = 1; number <= x; i++){
