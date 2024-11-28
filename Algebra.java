@@ -76,18 +76,26 @@ public class Algebra {
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
+		if (n == 0){
+			return 1;
+		}
 		int total = 1;
 		for (int i = 1 ; i <= n ; i++){
 			total = times(total, x);
 
 		}
+
+		if (x < 0 && n % 2 != 0) {
+            total = minus(0, total);
+		}
+
 		return total;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
 		int result = 0;
-		
+
 		if (x1 == x2){
 			return 1;
 		}
