@@ -83,23 +83,32 @@ public class Algebra {
 	public static int div(int x1, int x2) {
 		int result = 0;
 		if (x1 == x2){
-			result = 1;
+			return 1;
 		}
-		if (x1 < 0) {
-			x1 = minus(0, x1);
-		}
-		if (x2 < 0) {
-			x2 = minus(0, x2);
-		}
-			for (int i = 0; result <= x1; i++){
-				result = plus(result, x2);
+		if (x1 < 0 && x2 >= 0) {
+			x1 = minus(0, x1);  
+			while (x1 >= x2) {
+				x1 = minus(x1, x2);  
+				result = plus(result, 1);  
 			}
-			result = minus(i, 1);
-
-		if ((x1 < 0 && x2 >= 0 || x2 < 0 && x1 >= 0)) {
-			result = minus(0, result);
+			result = minus(0, result);  
 		}
-		
+		else if (x1 >= 0 && x2 < 0) {
+			x2 = minus(0, x2);  
+			while (x1 >= x2) {
+				x1 = minus(x1, x2);  
+				result = plus(result, 1);  
+			}
+			result = minus(0, result);  
+		}
+		else {
+			
+			while (x1 >= x2) {
+				x1 = minus(x1, x2);  
+				result = plus(result, 1);  
+			}
+		}
+	
 		return result;
 	
 }
